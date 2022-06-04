@@ -38,7 +38,7 @@ async def async_requests_main():
 
 def async_main2():
     if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())    
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(async_requests_main())
     print(f"--- {time.time() - start_time} seconds ---")
 
@@ -69,6 +69,7 @@ def async_main3():
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(async_gather_tasks())
     print(f"--- {time.time() - start_time} seconds ---")
+
 
 def main3():
     Fire(async_main3)
