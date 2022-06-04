@@ -18,9 +18,26 @@ async def async_main() -> None:
     print(f"finished at {time.strftime('%X')}")
 
 
-def mainloop() -> None:
+def mainloop1() -> None:
     asyncio.run(async_main())
 
 
-def main() -> None:
-    Fire(mainloop)
+def main1() -> None:
+    Fire(mainloop1)
+
+
+async def tasks_main() -> None:
+    task1 = asyncio.create_task(say_after(1, "hello"))
+    task2 = asyncio.create_task(say_after(2, "world"))
+    print(f"started at {time.strftime('%X')}")
+    await task1
+    await task2
+    print(f"finished at {time.strftime('%X')}")
+
+
+def mainloop2() -> None:
+    asyncio.run(tasks_main())
+
+
+def main2() -> None:
+    Fire(mainloop2)
