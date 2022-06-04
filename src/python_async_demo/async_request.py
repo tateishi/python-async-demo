@@ -64,10 +64,24 @@ async def async_gather_tasks():
             print(pokemon)
 
 
+async def async_gather_tasks2():
+    async with aiohttp.ClientSession(trust_env=True) as session:
+        url = "https://pokeapi.co/api/v2"
+        tasks = [
+            asyncio.ensure_future(
+                get_pokemon(session, f"{url}/pokemon/{number}")
+            )
+            for number in range(1, 151)
+        ]
+        original_pokemon = await asyncio.gather(*tasks)
+        for pokemon in original_pokemon:
+            print(pokemon)
+
+
 def async_main3():
     if sys.platform == "win32":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(async_gather_tasks())
+    asyncio.run(async_gather_tasks2())
     print(f"--- {time.time() - start_time} seconds ---")
 
 
